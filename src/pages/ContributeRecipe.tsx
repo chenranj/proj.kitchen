@@ -31,7 +31,8 @@ export function ContributeRecipe() {
   const [name, setName] = useState('')
   const [category, setCategory] = useState('')
   const [difficulty, setDifficulty] = useState<string>('')
-  const [tools, setTools] = useState('')
+  const [tools, setTools] = useState<string[]>([])
+  const [toolInput, setToolInput] = useState('')
   const [ingredients, setIngredients] = useState<Ingredient[]>([
     { name: '', amount: '' },
   ])
@@ -74,10 +75,7 @@ export function ContributeRecipe() {
     name: name.trim(),
     category,
     difficulty: difficulty as Recipe['difficulty'],
-    tools: tools
-      .split(/[,，、]/)
-      .map((t) => t.trim())
-      .filter(Boolean),
+    tools,
     ingredients: ingredients.filter((i) => i.name.trim()),
     steps: steps.filter((s) => s.trim()),
     ...(tips.trim() ? { tips: tips.trim() } : {}),
@@ -322,11 +320,40 @@ export function ContributeRecipe() {
           {/* Tools */}
           <div className="space-y-2">
             <Label>所需工具</Label>
-            <Input
-              placeholder="用逗号分隔，如：炒锅、砂锅"
-              value={tools}
-              onChange={(e) => setTools(e.target.value)}
-            />
+            <div className="border-input focus-within:ring-ring flex flex-wrap items-center gap-1.5 rounded-md border px-3 py-2 focus-within:ring-1">
+              {tools.map((tool, i) => (
+                <Badge key={i} variant="secondary" className="gap-1 pr-1">
+                  {tool}
+                  <button
+                    type="button"
+                    className="hover:bg-muted-foreground/20 ml-0.5 rounded-full p-0.5"
+                    onClick={() => setTools(tools.filter((_, idx) => idx !== i))}
+                  >
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M3 3l6 6M9 3l-6 6" />
+                    </svg>
+                  </button>
+                </Badge>
+              ))}
+              <input
+                className="placeholder:text-muted-foreground min-w-[120px] flex-1 bg-transparent text-sm outline-none"
+                placeholder={tools.length === 0 ? '输入后按回车添加，如：炒锅' : '继续添加...'}
+                value={toolInput}
+                onChange={(e) => setToolInput(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    e.preventDefault()
+                    const val = toolInput.trim()
+                    if (val && !tools.includes(val)) {
+                      setTools([...tools, val])
+                      setToolInput('')
+                    }
+                  } else if (e.key === 'Backspace' && !toolInput && tools.length > 0) {
+                    setTools(tools.slice(0, -1))
+                  }
+                }}
+              />
+            </div>
           </div>
 
           {/* Ingredients */}
