@@ -1,3 +1,4 @@
 /api/recipes    /api/recipes.json    200
 /api/recipes/:id    /api/recipes/:id.json    200
+/api/units    /api/units.json    200
 /*  /index.html  200

@@ -39,4 +39,12 @@ fs.writeFileSync(
   JSON.stringify(index, null, 2),
 )
 
-console.log(`Built API: ${index.length} recipes`)
+// Write units
+const unitsRaw = fs.readFileSync(path.resolve('units.json'), 'utf-8')
+const units = JSON.parse(unitsRaw)
+fs.writeFileSync(
+  path.join(outDir, 'units.json'),
+  JSON.stringify(units, null, 2),
+)
+
+console.log(`Built API: ${index.length} recipes, ${units.length} units`)

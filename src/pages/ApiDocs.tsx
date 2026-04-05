@@ -34,20 +34,44 @@ const endpoints = [
   "tips": "焯水时冷水下锅..."
 }`,
   },
+  {
+    method: 'GET',
+    path: '/api/units',
+    description: '获取所有支持的用量单位列表',
+    response: `[
+  { "unit": "g", "label": "克 (g)" },
+  { "unit": "ml", "label": "毫升 (ml)" },
+  { "unit": "个", "label": "个" },
+  { "unit": "勺", "label": "勺" }
+]`,
+  },
 ]
 
-const schema = `{
+const schema = `// 菜谱结构
+{
   "id": "string       — 唯一标识（文件名）",
   "name": "string     — 菜名",
   "category": "string — 分类（川菜/粤菜/家常菜...）",
   "difficulty": "简单 | 中等 | 困难",
   "tools": "string[]  — 所需工具",
   "ingredients": [
-    { "name": "string — 食材名", "amount": "string — 用量" }
+    { "name": "string — 食材名", "amount": "string — 数量+单位，如 500g" }
   ],
   "steps": "string[]  — 制作步骤",
   "tips": "string?    — 注意事项（可选）"
-}`
+}
+
+// 单位结构
+{
+  "unit": "string  — 单位标识，如 g、ml、个",
+  "label": "string — 显示名称，如 克 (g)"
+}
+
+// 支持的单位
+// 重量: g, kg, 斤, 两
+// 体积: ml, L, 碗, 杯
+// 计量: 个, 片, 根, 颗, 瓣, 条, 只, 块, 把, 滴
+// 勺量: 勺, 茶匙, 汤匙, 大匙, 小匙`
 
 export function ApiDocs() {
   return (
@@ -102,14 +126,19 @@ const recipes = await res.json()
 
 // 获取单个菜谱
 const detail = await fetch(\`https://proj.kitchen/api/recipes/\${id}\`)
-const recipe = await detail.json()`}</code>
+const recipe = await detail.json()
+
+// 获取支持的单位列表
+const unitsRes = await fetch('https://proj.kitchen/api/units')
+const units = await unitsRes.json()`}</code>
             </pre>
           </div>
           <div>
             <p className="mb-2 text-sm font-medium">cURL：</p>
             <pre className="bg-muted overflow-x-auto rounded-lg p-4 text-sm">
               <code>{`curl https://proj.kitchen/api/recipes
-curl https://proj.kitchen/api/recipes/hongshaorou`}</code>
+curl https://proj.kitchen/api/recipes/hongshaorou
+curl https://proj.kitchen/api/units`}</code>
             </pre>
           </div>
         </CardContent>

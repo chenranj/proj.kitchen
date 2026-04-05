@@ -21,3 +21,10 @@ export const CATEGORIES = [
 ] as const
 
 export const DIFFICULTIES = ['简单', '中等', '困难'] as const
+
+export interface Unit {
+  unit: string
+  label: string
+}
+
+export { default as UNITS } from '../../units.json'

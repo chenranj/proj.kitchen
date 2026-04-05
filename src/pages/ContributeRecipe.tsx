@@ -13,7 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { CATEGORIES, DIFFICULTIES } from '@/types/recipe'
+import { CATEGORIES, DIFFICULTIES, UNITS } from '@/types/recipe'
 import type { Ingredient, Recipe } from '@/types/recipe'
 
 import { REPO_OWNER, REPO_NAME } from '@/config'
@@ -373,11 +373,33 @@ export function ContributeRecipe() {
                   className="flex-1"
                 />
                 <Input
-                  placeholder="用量，如 500g"
-                  value={ing.amount}
-                  onChange={(e) => updateIngredient(i, 'amount', e.target.value)}
-                  className="flex-1"
+                  type="number"
+                  placeholder="数量"
+                  value={ing.amount.replace(/[^\d.]/g, '')}
+                  onChange={(e) => {
+                    const unit = ing.amount.replace(/[\d.]/g, '')
+                    updateIngredient(i, 'amount', e.target.value + unit)
+                  }}
+                  className="w-20"
                 />
+                <Select
+                  value={ing.amount.replace(/[\d.]/g, '') || undefined}
+                  onValueChange={(v) => {
+                    const num = ing.amount.replace(/[^\d.]/g, '')
+                    updateIngredient(i, 'amount', num + v)
+                  }}
+                >
+                  <SelectTrigger className="w-28">
+                    <SelectValue placeholder="单位" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {UNITS.map((u) => (
+                      <SelectItem key={u.unit} value={u.unit}>
+                        {u.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
                 {ingredients.length > 1 && (
                   <Button
                     type="button"

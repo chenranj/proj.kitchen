@@ -16,8 +16,8 @@ const zhContent = [
     body: '本应用使用 Apple Intelligence 提供 AI 食谱生成功能。该功能完全在您的设备上运行，由 Apple 的设备端模型处理，不会将您的输入内容发送到任何外部服务器。',
   },
   {
-    title: '第三方服务',
-    body: '本应用使用开源项目《程序员做饭指南》获取食谱和食材数据。该项目托管在 GitHub 上，所有数据均公开可用。',
+    title: '第三方服务与数据来源',
+    body: '本应用使用 proj.kitchen（厨房计划网站）提供的开放 API 获取食谱、食材及用量单位数据。该网站托管的食谱数据源自开源项目《程序员做饭指南》，所有数据均公开可用。本应用会通过网络请求访问 proj.kitchen 的 API 接口以获取和更新食谱数据，但不会向该服务发送任何用户个人信息。',
   },
   {
     title: '数据删除',
@@ -51,8 +51,8 @@ const enContent = [
     body: 'The App uses Apple Intelligence to provide AI-powered recipe generation. This feature runs entirely on your device using Apple\'s on-device models. Your input is not sent to any external server.',
   },
   {
-    title: 'Third-Party Services',
-    body: 'The App uses the open-source project "Programmer\'s Cooking Guide" to fetch recipe and ingredient data. This project is hosted on GitHub and all data is publicly available.',
+    title: 'Third-Party Services & Data Sources',
+    body: 'The App uses the open API provided by proj.kitchen (Proj. Kitchen website) to fetch recipes, ingredients, and unit data. The recipe data hosted on this website is sourced from the open-source project "Programmer\'s Cooking Guide," and all data is publicly available. The App makes network requests to proj.kitchen API endpoints to retrieve and update recipe data, but does not send any personal user information to this service.',
   },
   {
     title: 'Data Deletion',
@@ -85,8 +85,8 @@ export function PrivacyPolicy() {
           </h2>
           <p className="text-muted-foreground mt-1 text-sm">
             {lang === 'zh'
-              ? '生效日期：2026 年 4 月 4 日'
-              : 'Effective Date: April 4, 2026'}
+              ? '生效日期：2026 年 4 月 5 日'
+              : 'Effective Date: April 5, 2026'}
           </p>
         </div>
         <div className="flex gap-1 rounded-lg border p-1">
