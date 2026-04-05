@@ -83,6 +83,15 @@ export function ApiDocs() {
         </p>
       </div>
 
+      <div className="rounded-lg border border-amber-500/50 bg-amber-500/10 px-4 py-3 text-sm">
+        <p className="font-medium text-amber-600 dark:text-amber-400">
+          注意：本站服务器资源有限，如有大量请求需求，请自行部署。
+        </p>
+        <p className="text-muted-foreground mt-1">
+          Fork 本项目到自己的服务器，定期从上游同步即可获取最新数据。本项目采用 MIT 协议，可自由商业使用，但请保留署名。
+        </p>
+      </div>
+
       <Card>
         <CardHeader>
           <CardTitle>数据结构</CardTitle>
@@ -144,18 +153,6 @@ curl https://proj.kitchen/api/units`}</code>
         </CardContent>
       </Card>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>自部署</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p className="text-muted-foreground text-sm leading-relaxed">
-            如果你有大量请求需求，建议 fork 本项目到自己的服务器。
-            只需定期从上游同步即可获取最新菜谱数据。
-            本项目采用 MIT 协议，可自由商业使用，但请保留署名。
-          </p>
-        </CardContent>
-      </Card>
     </div>
   )
 }
