@@ -4,7 +4,7 @@ import { Badge } from '@/components/ui/badge'
 const endpoints = [
   {
     method: 'GET',
-    path: '/api/recipes.json',
+    path: '/api/recipes',
     description: '获取所有菜谱的索引列表',
     response: `[
   {
@@ -17,7 +17,7 @@ const endpoints = [
   },
   {
     method: 'GET',
-    path: '/api/recipes/{id}.json',
+    path: '/api/recipes/{id}',
     description: '获取单个菜谱的完整信息',
     response: `{
   "id": "hongshaorou",
@@ -97,19 +97,19 @@ export function ApiDocs() {
             <p className="mb-2 text-sm font-medium">JavaScript / TypeScript：</p>
             <pre className="bg-muted overflow-x-auto rounded-lg p-4 text-sm">
               <code>{`// 获取菜谱列表
-const res = await fetch('https://your-domain/api/recipes.json')
+const res = await fetch('https://proj.kitchen/api/recipes')
 const recipes = await res.json()
 
 // 获取单个菜谱
-const detail = await fetch(\`https://your-domain/api/recipes/\${id}.json\`)
+const detail = await fetch(\`https://proj.kitchen/api/recipes/\${id}\`)
 const recipe = await detail.json()`}</code>
             </pre>
           </div>
           <div>
             <p className="mb-2 text-sm font-medium">cURL：</p>
             <pre className="bg-muted overflow-x-auto rounded-lg p-4 text-sm">
-              <code>{`curl https://your-domain/api/recipes.json
-curl https://your-domain/api/recipes/hongshaorou.json`}</code>
+              <code>{`curl https://proj.kitchen/api/recipes
+curl https://proj.kitchen/api/recipes/hongshaorou`}</code>
             </pre>
           </div>
         </CardContent>

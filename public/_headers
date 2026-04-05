@@ -1,2 +1,6 @@
 /api/recipes/*.json
   Content-Type: application/json; charset=utf-8
+/api/recipes
+  Content-Type: application/json; charset=utf-8
+/api/recipes/*
+  Content-Type: application/json; charset=utf-8
