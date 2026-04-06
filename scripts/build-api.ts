@@ -39,6 +39,17 @@ fs.writeFileSync(
   JSON.stringify(index, null, 2),
 )
 
+// Write bulk file with all recipe details (for app import)
+const allRecipes: Array<Record<string, unknown>> = []
+for (const file of files) {
+  const raw = fs.readFileSync(path.join(recipesDir, file), 'utf-8')
+  allRecipes.push(JSON.parse(raw))
+}
+fs.writeFileSync(
+  path.join(outDir, 'all-recipes.json'),
+  JSON.stringify(allRecipes),
+)
+
 // Write units
 const unitsRaw = fs.readFileSync(path.resolve('units.json'), 'utf-8')
 const units = JSON.parse(unitsRaw)
